@@ -39,7 +39,7 @@
             position: relative;
         }
         
-        /* Floating Elements Background */
+        
         .floating-bg {
             position: fixed;
             inset: 0;
@@ -64,7 +64,7 @@
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
         
-        /* Corner Decorations */
+       
         .deco-corner {
             position: absolute;
             font-size: 2.5rem;
@@ -84,7 +84,7 @@
         .deco-bl { bottom: 8%; left: 8%; animation-delay: 2s; }
         .deco-br { bottom: 5%; right: 8%; animation-delay: 0.5s; }
         
-        /* Main Container */
+        
         .container {
             z-index: 10;
             text-align: center;
@@ -117,7 +117,7 @@
             letter-spacing: 0.5px;
         }
         
-        /* 3D Scene */
+        
         .scene {
             width: min(320px, 85vw);
             height: min(320px, 85vw);
@@ -147,7 +147,7 @@
             pointer-events: none;
         }
         
-        /* Cute 3D Teddy */
+       
         .teddy {
             position: relative;
             width: 100%;
@@ -155,7 +155,7 @@
             transform-style: preserve-3d;
         }
         
-        /* Shadow */
+        
         .teddy-shadow {
             position: absolute;
             width: 160px;
@@ -169,7 +169,7 @@
             filter: blur(4px);
         }
         
-        /* Body - Round and chubby */
+       
         .teddy-body-3d {
             position: absolute;
             width: 140px;
@@ -191,7 +191,7 @@
             50% { transform: translateX(-50%) translateZ(20px) scale(1.02); }
         }
         
-        /* Belly patch */
+        
         .belly {
             position: absolute;
             width: 85px;
@@ -204,7 +204,7 @@
             box-shadow: inset 0 -5px 15px rgba(0,0,0,0.08);
         }
         
-        /* Heart on belly */
+        
         .heart-belly {
             position: absolute;
             width: 35px;
@@ -225,7 +225,7 @@
             75% { transform: translate(-50%, -50%) scale(1.1); }
         }
         
-        /* Head - Big and round (kawaii style) */
+        
         .teddy-head {
             position: absolute;
             width: 150px;
@@ -247,7 +247,7 @@
             50% { transform: translateX(-50%) translateZ(40px) scale(1.03); }
         }
         
-        /* Ears - Small and round on sides */
+        
         .ear {
             position: absolute;
             width: 45px;
@@ -275,7 +275,7 @@
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
         }
         
-        /* Snout - Cream colored oval */
+        
         .snout {
             position: absolute;
             width: 75px;
@@ -288,7 +288,7 @@
             box-shadow: inset 0 -5px 10px rgba(0,0,0,0.06);
         }
         
-        /* Nose - Small heart or oval */
+        
         .nose {
             position: absolute;
             width: 16px;
@@ -301,7 +301,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
-        /* Mouth - Cute W shape */
+        
         .mouth {
             position: absolute;
             width: 30px;
@@ -325,7 +325,7 @@
         .mouth::before { left: 0; border-right: 1.5px solid transparent; }
         .mouth::after { right: 0; border-left: 1.5px solid transparent; }
         
-        /* Eyes - Big and sparkly */
+        
         .eye {
             position: absolute;
             width: 18px;
@@ -340,7 +340,7 @@
         .eye.left { left: 35px; }
         .eye.right { right: 35px; }
         
-        /* Eye shine */
+        
         .eye::before {
             content: '';
             position: absolute;
@@ -368,7 +368,7 @@
             98% { transform: scaleY(0.1); }
         }
         
-        /* Cheeks - Big pink circles */
+        
         .cheek {
             position: absolute;
             width: 28px;
@@ -382,7 +382,7 @@
         .cheek.left { left: 18px; }
         .cheek.right { right: 18px; }
         
-        /* Arms - Short and stubby */
+        
         .arm {
             position: absolute;
             width: 50px;
@@ -404,7 +404,7 @@
             transform: rotate(20deg) translateZ(25px);
         }
         
-        /* Paws */
+        
         .paw-pad {
             position: absolute;
             width: 20px;
@@ -417,7 +417,7 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        /* Legs - Short and chubby */
+        
         .leg {
             position: absolute;
             width: 55px;
@@ -433,7 +433,7 @@
         .leg.left { left: 55px; }
         .leg.right { right: 55px; }
         
-        /* Pop Animation */
+        
         .popped .teddy-head,
         .popped .teddy-body-3d,
         .popped .arm,
@@ -455,7 +455,7 @@
             to { opacity: 0; transform: translateX(-50%) scale(0); }
         }
         
-        /* Progress Bar */
+        
         .progress-container {
             width: min(200px, 65%);
             height: 16px;
@@ -511,7 +511,7 @@
             transform: translateY(0);
         }
         
-        /* Message Modal */
+        
         .message-overlay {
             position: fixed;
             inset: 0;
@@ -586,7 +586,7 @@
             font-size: clamp(1.4rem, 5vw, 1.8rem);
         }
         
-        /* Reset Button */
+        
         .reset-btn {
             margin-top: 25px;
             padding: 14px 32px;
@@ -623,7 +623,7 @@
             transform: translateY(-1px) scale(0.98);
         }
         
-        /* Effects */
+        
         .sparkle {
             position: fixed;
             pointer-events: none;
@@ -647,7 +647,7 @@
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
         
-        /* Responsive */
+        
         @media (max-width: 480px) {
             .scene {
                 width: 280px;
@@ -794,7 +794,7 @@
                 floatingBg: document.getElementById('floatingBg')
             };
             
-            // Create floating background items
+            
             function createFloatingItem() {
                 const item = document.createElement('div');
                 item.className = 'floating-item';
@@ -819,7 +819,7 @@
                 setInterval(createFloatingItem, 800);
             }
             
-            // Visual effects
+            
             function createSparkle(x, y) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle';
