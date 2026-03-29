@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry, My Love 🧸💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bear-color: #C4A77D;
+            --bear-dark: #A68B5B;
+            --bear-light: #E8D4B8;
+            --bear-cream: #F5E6D3;
+            --pink-primary: #FF9EB5;
+            --pink-light: #FFB8C9;
+            --pink-soft: #FFD1DC;
+            --pink-dark: #FF7AA2;
+            --bg-cream: #FFF8F5;
+            --bg-pink: #FFF0F3;
+            --shadow-soft: rgba(166, 139, 91, 0.15);
+            --shadow-pink: rgba(255, 154, 181, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-pink) 50%, #FFE4EC 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Floating Elements Background */
+        .floating-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-item {
+            position: absolute;
+            opacity: 0.5;
+            animation: float-up 8s ease-in-out infinite;
+        }
+        
+        .floating-item.bear { font-size: 2rem; }
+        .floating-item.heart { font-size: 1.5rem; }
+        .floating-item.star { font-size: 1.2rem; }
+        
+        @keyframes float-up {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Corner Decorations */
+        .deco-corner {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.6;
+            animation: gentle-sway 4s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        @keyframes gentle-sway {
+            0%, 100% { transform: rotate(-8deg) scale(1); }
+            50% { transform: rotate(8deg) scale(1.1); }
+        }
+        
+        .deco-tl { top: 5%; left: 5%; animation-delay: 0s; }
+        .deco-tr { top: 8%; right: 5%; animation-delay: 1s; }
+        .deco-bl { bottom: 8%; left: 8%; animation-delay: 2s; }
+        .deco-br { bottom: 5%; right: 8%; animation-delay: 0.5s; }
+        
+        /* Main Container */
+        .container {
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .title {
+            font-family: 'Sacramento', cursive;
+            font-size: clamp(3rem, 10vw, 4.5rem);
+            color: var(--pink-dark);
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 6px var(--shadow-pink);
+            animation: title-bounce 2s ease-in-out infinite;
+            line-height: 1;
+        }
+        
+        @keyframes title-bounce {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        
+        .subtitle {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--bear-dark);
+            font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        /* 3D Scene */
+        .scene {
+            width: min(320px, 85vw);
+            height: min(320px, 85vw);
+            perspective: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .teddy-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .teddy-wrapper:hover:not(.popped) {
+            transform: rotateY(12deg) rotateX(-8deg) scale(1.02);
+        }
+        
+        .teddy-wrapper:active:not(.popped) {
+            transform: scale(0.96) rotateY(12deg);
+        }
+        
+        .teddy-wrapper.popped {
+            pointer-events: none;
+        }
+        
+        /* Cute 3D Teddy */
+        .teddy {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+        
+        /* Shadow */
+        .teddy-shadow {
+            position: absolute;
+            width: 160px;
+            height: 35px;
+            background: radial-gradient(ellipse, var(--shadow-soft) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            filter: blur(4px);
+        }
+        
+        /* Body - Round and chubby */
+        .teddy-body-3d {
+            position: absolute;
+            width: 140px;
+            height: 130px;
+            background: linear-gradient(160deg, var(--bear-color) 0%, var(--bear-dark) 100%);
+            border-radius: 50% 50% 48% 48%;
+            left: 50%;
+            top: 140px;
+            transform: translateX(-50%) translateZ(20px);
+            box-shadow: 
+                inset -15px -15px 30px rgba(0,0,0,0.15),
+                inset 15px 15px 30px rgba(255,255,255,0.15),
+                0 20px 40px var(--shadow-soft);
+            animation: body-breathe 3s ease-in-out infinite;
+        }
+        
+        @keyframes body-breathe {
+            0%, 100% { transform: translateX(-50%) translateZ(20px) scale(1); }
+            50% { transform: translateX(-50%) translateZ(20px) scale(1.02); }
+        }
+        
+        /* Belly patch */
+        .belly {
+            position: absolute;
+            width: 85px;
+            height: 75px;
+            background: linear-gradient(160deg, var(--bear-cream) 0%, var(--bear-light) 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.08);
+        }
+        
+        /* Heart on belly */
+        .heart-belly {
+            position: absolute;
+            width: 35px;
+            height: 30px;
+            background: var(--pink-primary);
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+            animation: heart-pulse 1.3s ease-in-out infinite;
+            filter: drop-shadow(0 3px 6px var(--shadow-pink));
+        }
+        
+        @keyframes heart-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            25% { transform: translate(-50%, -50%) scale(1.2); }
+            50% { transform: translate(-50%, -50%) scale(1); }
+            75% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        /* Head - Big and round (kawaii style) */
+        .teddy-head {
+            position: absolute;
+            width: 150px;
+            height: 140px;
+            background: linear-gradient(160deg, var(--bear-color) 0%, var(--bear-dark) 100%);
+            border-radius: 50%;
+            left: 50%;
+            top: 45px;
+            transform: translateX(-50%) translateZ(40px);
+            box-shadow: 
+                inset -15px -15px 30px rgba(0,0,0,0.15),
+                inset 15px 15px 30px rgba(255,255,255,0.15),
+                0 15px 35px var(--shadow-soft);
+            animation: head-breathe 3s ease-in-out infinite;
+        }
+        
+        @keyframes head-breathe {
+            0%, 100% { transform: translateX(-50%) translateZ(40px) scale(1); }
+            50% { transform: translateX(-50%) translateZ(40px) scale(1.03); }
+        }
+        
+        /* Ears - Small and round on sides */
+        .ear {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(160deg, var(--bear-color) 0%, var(--bear-dark) 100%);
+            border-radius: 50%;
+            top: 5px;
+            box-shadow: 
+                inset -5px -5px 10px rgba(0,0,0,0.15),
+                0 5px 15px var(--shadow-soft);
+        }
+        
+        .ear.left { left: -5px; }
+        .ear.right { right: -5px; }
+        
+        .ear-inner {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(160deg, var(--bear-light) 0%, var(--bear-cream) 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
+        }
+        
+        /* Snout - Cream colored oval */
+        .snout {
+            position: absolute;
+            width: 75px;
+            height: 60px;
+            background: linear-gradient(160deg, var(--bear-cream) 0%, var(--bear-light) 100%);
+            border-radius: 50%;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%) translateZ(10px);
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.06);
+        }
+        
+        /* Nose - Small heart or oval */
+        .nose {
+            position: absolute;
+            width: 16px;
+            height: 12px;
+            background: #8B6F47;
+            border-radius: 50% 50% 45% 45%;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Mouth - Cute W shape */
+        .mouth {
+            position: absolute;
+            width: 30px;
+            height: 15px;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .mouth::before,
+        .mouth::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 12px;
+            border-bottom: 3px solid #8B6F47;
+            border-radius: 0 0 50% 50%;
+            top: 0;
+        }
+        
+        .mouth::before { left: 0; border-right: 1.5px solid transparent; }
+        .mouth::after { right: 0; border-left: 1.5px solid transparent; }
+        
+        /* Eyes - Big and sparkly */
+        .eye {
+            position: absolute;
+            width: 18px;
+            height: 22px;
+            background: #5D4E37;
+            border-radius: 50%;
+            top: 55px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: blink 4s infinite;
+        }
+        
+        .eye.left { left: 35px; }
+        .eye.right { right: 35px; }
+        
+        /* Eye shine */
+        .eye::before {
+            content: '';
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background: white;
+            border-radius: 50%;
+            top: 4px;
+            left: 4px;
+        }
+        
+        .eye::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            bottom: 5px;
+            right: 4px;
+        }
+        
+        @keyframes blink {
+            0%, 96%, 100% { transform: scaleY(1); }
+            98% { transform: scaleY(0.1); }
+        }
+        
+        /* Cheeks - Big pink circles */
+        .cheek {
+            position: absolute;
+            width: 28px;
+            height: 22px;
+            background: radial-gradient(ellipse, rgba(255, 158, 181, 0.8) 0%, rgba(255, 158, 181, 0.4) 70%);
+            border-radius: 50%;
+            top: 80px;
+            filter: blur(1px);
+        }
+        
+        .cheek.left { left: 18px; }
+        .cheek.right { right: 18px; }
+        
+        /* Arms - Short and stubby */
+        .arm {
+            position: absolute;
+            width: 50px;
+            height: 75px;
+            background: linear-gradient(160deg, var(--bear-color) 0%, var(--bear-dark) 100%);
+            border-radius: 50%;
+            top: 155px;
+            box-shadow: 
+                inset -5px -5px 10px rgba(0,0,0,0.15),
+                0 8px 20px var(--shadow-soft);
+        }
+        
+        .arm.left { 
+            left: 35px; 
+            transform: rotate(-20deg) translateZ(25px);
+        }
+        .arm.right { 
+            right: 35px; 
+            transform: rotate(20deg) translateZ(25px);
+        }
+        
+        /* Paws */
+        .paw-pad {
+            position: absolute;
+            width: 20px;
+            height: 18px;
+            background: var(--bear-light);
+            border-radius: 50%;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Legs - Short and chubby */
+        .leg {
+            position: absolute;
+            width: 55px;
+            height: 70px;
+            background: linear-gradient(160deg, var(--bear-color) 0%, var(--bear-dark) 100%);
+            border-radius: 50%;
+            bottom: 35px;
+            box-shadow: 
+                inset -5px -5px 10px rgba(0,0,0,0.15),
+                0 8px 20px var(--shadow-soft);
+        }
+        
+        .leg.left { left: 55px; }
+        .leg.right { right: 55px; }
+        
+        /* Pop Animation */
+        .popped .teddy-head,
+        .popped .teddy-body-3d,
+        .popped .arm,
+        .popped .leg {
+            animation: pop-out 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
+        }
+        
+        @keyframes pop-out {
+            0% { transform: scale(1); opacity: 1; }
+            40% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        .popped .teddy-shadow {
+            animation: shadow-fade 0.5s ease-out forwards;
+        }
+        
+        @keyframes shadow-fade {
+            to { opacity: 0; transform: translateX(-50%) scale(0); }
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: min(200px, 65%);
+            height: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 30px auto 12px;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 3px 6px rgba(0,0,0,0.08),
+                0 4px 12px var(--shadow-soft);
+            border: 2px solid white;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink-primary), var(--pink-light), var(--pink-soft));
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 15px var(--shadow-pink);
+        }
+        
+        .click-hint {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--pink-dark);
+            font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+            font-weight: 700;
+            min-height: 1.5em;
+            transition: all 0.3s ease;
+        }
+        
+        .click-counter {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 600;
+            color: var(--pink-dark);
+            box-shadow: 0 4px 15px var(--shadow-soft);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-size: 0.95rem;
+            border: 2px solid var(--pink-soft);
+        }
+        
+        .click-counter.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Message Modal */
+        .message-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 240, 243, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        
+        .message-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .message-card {
+            background: linear-gradient(145deg, #ffffff 0%, #FFF8FA 100%);
+            padding: clamp(35px, 9vw, 55px) clamp(30px, 7vw, 45px);
+            border-radius: 35px;
+            box-shadow: 
+                0 35px 80px rgba(255, 122, 162, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            max-width: 450px;
+            width: 92%;
+            text-align: center;
+            transform: scale(0) rotate(-8deg);
+            transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 3px solid var(--pink-soft);
+        }
+        
+        .message-overlay.show .message-card {
+            transform: scale(1) rotate(0deg);
+        }
+        
+        .message-hearts {
+            font-size: clamp(3rem, 9vw, 4rem);
+            margin-bottom: 15px;
+            animation: heart-bounce 1.2s ease-in-out infinite;
+            display: block;
+        }
+        
+        @keyframes heart-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        .love-message {
+            font-family: 'Sacramento', cursive;
+            font-size: clamp(2.8rem, 10vw, 4rem);
+            color: var(--pink-dark);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px var(--shadow-pink);
+            line-height: 1;
+        }
+        
+        .apology-text {
+            font-family: 'Quicksand', sans-serif;
+            color: #7A6A5A;
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            line-height: 1.9;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .signature {
+            font-family: 'Sacramento', cursive;
+            color: var(--pink-primary);
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+        }
+        
+        /* Reset Button */
+        .reset-btn {
+            margin-top: 25px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--pink-primary), var(--pink-light));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 30px var(--shadow-pink),
+                0 0 0 2px rgba(255, 255, 255, 0.4) inset;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            letter-spacing: 0.5px;
+        }
+        
+        .reset-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        
+        .reset-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 122, 162, 0.4);
+        }
+        
+        .reset-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+        
+        /* Effects */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+            animation: sparkle-anim 1s ease-out forwards;
+        }
+        
+        @keyframes sparkle-anim {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+        }
+        
+        .confetti {
+            position: fixed;
+            z-index: 99;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .scene {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .teddy-head {
+                width: 130px;
+                height: 120px;
+                top: 40px;
+            }
+            
+            .teddy-body-3d {
+                width: 120px;
+                height: 110px;
+                top: 125px;
+            }
+            
+            .arm {
+                width: 42px;
+                height: 65px;
+                top: 140px;
+            }
+            
+            .arm.left { left: 30px; }
+            .arm.right { right: 30px; }
+            
+            .leg {
+                width: 48px;
+                height: 60px;
+                bottom: 30px;
+            }
+            
+            .leg.left { left: 50px; }
+            .leg.right { right: 50px; }
+            
+            .ear {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bg" id="floatingBg"></div>
+    
+    <div class="deco-corner deco-tl">🌷</div>
+    <div class="deco-corner deco-tr">🎀</div>
+    <div class="deco-corner deco-bl">💖</div>
+    <div class="deco-corner deco-br">🧸</div>
+    
+    <main class="container">
+        <h1 class="title">I'm Sorry...</h1>
+        <p class="subtitle">I made a mistake, but my love for you is true 💕</p>
+        
+        <div class="scene">
+            <div class="teddy-wrapper" id="teddyWrapper">
+                <div class="click-counter" id="clickCounter">0 / 10 💕</div>
+                <div class="teddy" id="teddy">
+                    <div class="teddy-shadow"></div>
+                    <div class="leg left"><div class="paw-pad"></div></div>
+                    <div class="leg right"><div class="paw-pad"></div></div>
+                    <div class="arm left"><div class="paw-pad"></div></div>
+                    <div class="arm right"><div class="paw-pad"></div></div>
+                    <div class="teddy-body-3d">
+                        <div class="belly">
+                            <div class="heart-belly"></div>
+                        </div>
+                    </div>
+                    <div class="teddy-head">
+                        <div class="ear left"><div class="ear-inner"></div></div>
+                        <div class="ear right"><div class="ear-inner"></div></div>
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="cheek left"></div>
+                        <div class="cheek right"></div>
+                        <div class="snout">
+                            <div class="nose"></div>
+                            <div class="mouth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p class="click-hint" id="clickHint">Keep clicking the teddy to melt his heart! 💗</p>
+        
+        <button class="reset-btn" id="resetBtn">Give me another chance 💕</button>
+    </main>
+    
+    <div class="message-overlay" id="messageOverlay">
+        <div class="message-card">
+            <span class="message-hearts">💖💕💖</span>
+            <h2 class="love-message">I Love You!</h2>
+            <p class="apology-text">
+                I'm truly sorry for what I did.<br>
+                I should of been more careful on the things i say,<br>
+                and I promise to make it up to you.<br>
+                I hope nothing changes between us
+                Will you please forgive me? 🥺💕
+            </p>
+            <p class="signature">Forever Yours</p>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+            
+            const CONFIG = {
+                maxClicks: 10,
+                hints: [
+                    "Keep clicking the teddy to melt his heart! 💗",
+                    "His heart is warming up... 💕",
+                    "So close! Keep going! 💖",
+                    "His heart is melting for you! 💝",
+                    "Just a little more! 💓",
+                    "Almost there! 💗",
+                    "So very close! 💕",
+                    "Just one more click! 💖",
+                    "Ready to pop! 💝",
+                    "Here it comes! 💓"
+                ],
+                floatingItems: ['🧸', '💕', '💖', '🌸', '🎀', '💝', '✨', '🤎'],
+                sparkleEmojis: ['✨', '⭐', '💫', '🌟'],
+                confettiColors: ['#FF9EB5', '#FFB8C9', '#FFD1DC', '#FFE4B5', '#FF7AA2', '#F5E6D3']
+            };
+            
+            const state = {
+                clickCount: 0,
+                isPopped: false
+            };
+            
+            const elements = {
+                teddyWrapper: document.getElementById('teddyWrapper'),
+                progressBar: document.getElementById('progressBar'),
+                clickHint: document.getElementById('clickHint'),
+                clickCounter: document.getElementById('clickCounter'),
+                messageOverlay: document.getElementById('messageOverlay'),
+                resetBtn: document.getElementById('resetBtn'),
+                floatingBg: document.getElementById('floatingBg')
+            };
+            
+            // Create floating background items
+            function createFloatingItem() {
+                const item = document.createElement('div');
+                item.className = 'floating-item';
+                const type = Math.random();
+                if (type < 0.3) item.classList.add('bear');
+                else if (type < 0.7) item.classList.add('heart');
+                else item.classList.add('star');
+                
+                item.textContent = CONFIG.floatingItems[Math.floor(Math.random() * CONFIG.floatingItems.length)];
+                item.style.left = `${Math.random() * 100}%`;
+                item.style.animationDuration = `${Math.random() * 4 + 6}s`;
+                item.style.animationDelay = `${Math.random() * 3}s`;
+                elements.floatingBg.appendChild(item);
+                
+                setTimeout(() => item.remove(), 10000);
+            }
+            
+            function initFloatingItems() {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(createFloatingItem, i * 300);
+                }
+                setInterval(createFloatingItem, 800);
+            }
+            
+            // Visual effects
+            function createSparkle(x, y) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = CONFIG.sparkleEmojis[Math.floor(Math.random() * CONFIG.sparkleEmojis.length)];
+                sparkle.style.left = `${x}px`;
+                sparkle.style.top = `${y}px`;
+                sparkle.style.fontSize = `${Math.random() * 10 + 20}px`;
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+            
+            function createConfetti() {
+                for (let i = 0; i < 60; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.className = 'confetti';
+                        const size = Math.random() * 8 + 8;
+                        confetti.style.cssText = `
+                            left: ${Math.random() * 100}vw;
+                            width: ${size}px;
+                            height: ${size}px;
+                            background: ${CONFIG.confettiColors[Math.floor(Math.random() * CONFIG.confettiColors.length)]};
+                            animation-duration: ${Math.random() * 2 + 2.5}s;
+                            border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+                        `;
+                        document.body.appendChild(confetti);
+                        setTimeout(() => confetti.remove(), 4500);
+                    }, i * 25);
+                }
+            }
+            
+            function updateUI() {
+                const progress = (state.clickCount / CONFIG.maxClicks) * 100;
+                elements.progressBar.style.width = `${progress}%`;
+                elements.clickCounter.textContent = `${state.clickCount} / 10 💕`;
+                elements.clickCounter.classList.add('visible');
+                
+                const hintIndex = Math.min(state.clickCount - 1, CONFIG.hints.length - 1);
+                elements.clickHint.textContent = CONFIG.hints[hintIndex];
+                elements.clickHint.style.color = `hsl(${340 + state.clickCount * 2}, 80%, ${60 + state.clickCount * 2}%)`;
+            }
+            
+            function triggerPop() {
+                state.isPopped = true;
+                elements.teddyWrapper.classList.add('popped');
+                elements.clickHint.textContent = "💕 POP! 💕";
+                elements.clickCounter.textContent = "Complete! 💖";
+                
+                createConfetti();
+                
+                setTimeout(() => {
+                    elements.messageOverlay.classList.add('show');
+                    elements.resetBtn.classList.add('visible');
+                    elements.clickHint.style.opacity = '0';
+                    elements.clickCounter.style.opacity = '0';
+                }, 800);
+            }
+            
+            function reset() {
+                state.clickCount = 0;
+                state.isPopped = false;
+                
+                elements.teddyWrapper.classList.remove('popped');
+                elements.messageOverlay.classList.remove('show');
+                elements.resetBtn.classList.remove('visible');
+                
+                elements.progressBar.style.width = '0%';
+                elements.clickHint.textContent = CONFIG.hints[0];
+                elements.clickHint.style.opacity = '1';
+                elements.clickHint.style.color = '';
+                elements.clickCounter.textContent = '0 / 10 💕';
+                elements.clickCounter.classList.remove('visible');
+                elements.clickCounter.style.opacity = '1';
+            }
+            
+            function handleTeddyClick(e) {
+                if (state.isPopped || state.clickCount >= CONFIG.maxClicks) return;
+                
+                state.clickCount++;
+                updateUI();
+                
+                createSparkle(e.clientX, e.clientY);
+                
+                const rect = elements.teddyWrapper.getBoundingClientRect();
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        createSparkle(
+                            rect.left + Math.random() * rect.width,
+                            rect.top + Math.random() * rect.height
+                        );
+                    }, i * 60);
+                }
+                
+                if (state.clickCount >= CONFIG.maxClicks) {
+                    setTimeout(triggerPop, 250);
+                }
+            }
+            
+            function init() {
+                initFloatingItems();
+                elements.teddyWrapper.addEventListener('click', handleTeddyClick);
+                elements.resetBtn.addEventListener('click', reset);
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>'''
